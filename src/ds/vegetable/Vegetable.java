@@ -2,18 +2,18 @@ package ds.vegetable;
 
 import java.util.Objects;
 
-enum Type {
-	CAPSICUM,
-	TOMATO,
-	LETTUCE,
-	ONION
-}
-
 public class Vegetable {
 	
-	private Type type;
+	private TYPE type;
 	private double weight;
 	private double ripeness;
+	
+	public enum TYPE {
+		CAPSICUM,
+		TOMATO,
+		LETTUCE,
+		ONION
+	}
 	
 	/**
 	 * Setup vegetable object attributes.
@@ -22,15 +22,23 @@ public class Vegetable {
 	 *         and ripeness must be between 0 and 1.
 	 */
 
-	public Vegetable(Type type, double weight, double ripeness) {
+	public Vegetable(TYPE type, double weight, double ripeness) {
 		
 		this.type = type;
 		this.weight = weight;
 		this.ripeness = ripeness;
 		
+		if (weight < 0) {
+			throw new InvalidVegetableWeightException("Vegetable weight is incorrect");
+		}
+		
+		if (ripeness < 0 || ripeness > 1) {
+			throw new InvalidVegetableRipenessException("Vegetable ripeness is incorect");
+		}
+		
 	}
 	
-	public Type getType() {
+	public TYPE getType() {
 		return type;
 	}
 	
@@ -43,9 +51,21 @@ public class Vegetable {
 	}
 	
 	@Override
-	public boolean equals() {
-		return false;
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		
+		Vegetable vegetable = (Vegetable) o;
+		return Double.compare(vegetable.weight, weight) < 0.05 && 
+				Double.compare(vegetable.ripeness, ripeness) == 0 && 
+				type == vegetable.type;
 	}
+	
 	
 	@Override
 	public int hashcode() {
@@ -58,8 +78,9 @@ public class Vegetable {
 				"type = " + type + 
 				", weight = " + weight + 
 				"kg, ripeness = " + ripeness + 
-				'}';
+				"%}";
 	}
 	
-	
 }
+
+
