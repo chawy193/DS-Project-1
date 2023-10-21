@@ -81,6 +81,65 @@ public class Vegetable {
 				"%}";
 	}
 	
+	@Override
+    public int compareTo(Vegetable other) {
+		
+		// Capsicum is greater than other types
+        if (this.type == TYPE.CAPSICUM && other.type != TYPE.CAPSICUM) {
+            return 1; 
+        
+		// Other types are less than capsicum
+		} else if (this.type != TYPE.CAPSICUM && other.type == TYPE.CAPSICUM) {
+            return -1; 
+		
+		// Both types are capsicum
+		} else if (this.type == TYPE.CAPSICUM && other.type == TYPE.CAPSICUM) {
+			
+			// Compare capsicum weight
+			int weightComparison = Double.compare(this.weight, other.weight);
+			if (weightComparison != 0) {
+				
+				// Compare capsicum ripeness if weight difference within 0.05
+				if (-0.05 <= (this.weight - other.weight) <= 0.05) {
+					return Double.compare(this.ripeness, other.ripeness);
+				} else {
+					return weightComparison;
+				}
+			} else {
+				return Double.compare(this.ripeness, other.ripeness);
+			}
+		
+		// Other types, tomato, lettuce and onion
+        } else if (this.type != TYPE.CAPSICUM && other.type != TYPE.CAPSICUM) {
+            
+			// Tomato or lettuce is greater than onion
+			if (this.type != TYPE.ONION && other.type == TYPE.ONION) {
+				return 1;
+			
+			// Onion is less than tomato or lettuce
+			} else if (this.type == TYPE.ONION && other.type != TYPE.ONION) {
+				return -1;
+			
+			// Compare weight between tomato and lettuce, or onion and onion
+			} else {
+				int weightComparison = Double.compare(this.weight, other.weight);
+				if (weightComparison != 0) {
+					if (-0.05 <= (this.weight - other.weight) <= 0.05) {
+						return Double.compare(this.ripeness, other.ripeness);
+					} else {
+						return weightComparison;
+					}
+				} else {
+					return Double.compare(this.ripeness, other.ripeness);
+				}
+			}
+            
+        }
+		
+		// Same weight and ripeness if none of the conditions are met
+        return 0; 
+    }
+	
 }
 
 
