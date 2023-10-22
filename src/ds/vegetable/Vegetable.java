@@ -61,11 +61,10 @@ public class Vegetable {
 		}
 		
 		Vegetable vegetable = (Vegetable) o;
-		return Double.compare(vegetable.weight, weight) < 0.05 && 
+		return Double.compare(vegetable.weight, weight) == 0 && 
 				Double.compare(vegetable.ripeness, ripeness) == 0 && 
 				type == vegetable.type;
 	}
-	
 	
 	@Override
 	public int hashcode() {
@@ -99,8 +98,11 @@ public class Vegetable {
 			int weightComparison = Double.compare(this.weight, other.weight);
 			if (weightComparison != 0) {
 				
-				// Compare capsicum ripeness if weight difference within 0.05
-				if (-0.05 <= (this.weight - other.weight) <= 0.05) {
+				// Compare capsicum ripeness if weight difference is within 0.05
+				double thisWeight = this.weight;
+				double otherWeight = other.weight;
+				double weightDiff = thisWeight - otherWeight;
+				if (-0.05 <= weightDiff && weightDiff <= 0.05) {
 					return Double.compare(this.ripeness, other.ripeness);
 				} else {
 					return weightComparison;
@@ -124,7 +126,12 @@ public class Vegetable {
 			} else {
 				int weightComparison = Double.compare(this.weight, other.weight);
 				if (weightComparison != 0) {
-					if (-0.05 <= (this.weight - other.weight) <= 0.05) {
+					
+					// Compare vegetable ripeness if weight difference is within 0.05
+					double thisWeight = this.weight;
+					double otherWeight = other.weight;
+					double weightDiff = thisWeight - otherWeight;
+					if (-0.05 <= weightDiff && weightDiff <= 0.05) {
 						return Double.compare(this.ripeness, other.ripeness);
 					} else {
 						return weightComparison;
