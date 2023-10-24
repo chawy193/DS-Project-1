@@ -2,7 +2,7 @@ package ds.vegetable;
 
 import java.util.Objects;
 
-public class Vegetable {
+public class Vegetable implements Comparable<Vegetable> {
 	
 	private TYPE type;
 	private double weight;
@@ -51,23 +51,23 @@ public class Vegetable {
 	}
 	
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
 		
-		if (o == null || getClass() != o.getClass()) {
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 		
-		Vegetable vegetable = (Vegetable) o;
+		Vegetable vegetable = (Vegetable) obj;
 		return Double.compare(vegetable.weight, weight) == 0 && 
 				Double.compare(vegetable.ripeness, ripeness) == 0 && 
 				type == vegetable.type;
 	}
 	
 	@Override
-	public int hashcode() {
+	public int hashCode() {
 		return Objects.hash(type, weight, ripeness);
 	}
 	
@@ -81,7 +81,7 @@ public class Vegetable {
 	}
 	
 	@Override
-    public int compareTo(Vegetable other) {
+	public int compareTo(Vegetable other) {
 		
 		// Capsicum is greater than other types
         if (this.type == TYPE.CAPSICUM && other.type != TYPE.CAPSICUM) {
@@ -144,7 +144,7 @@ public class Vegetable {
         }
 		
 		// Same weight and ripeness if none of the conditions are met
-        return 0; 
+        return 0;
     }
 	
 }
