@@ -1,16 +1,11 @@
 package ds.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import ds.vegetable.Vegetable;
-import ds.vegetable.InvalidFruitRipenessException;
-import ds.vegetable.InvalidFruitWeightException;
 import ds.vegetable.InvalidVegetableRipenessException;
 import ds.vegetable.InvalidVegetableWeightException;
-import ds.vegetable.Vegetable.TYPE;
 
 class VegetableTest {
 
