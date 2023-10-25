@@ -20,10 +20,13 @@ public class CustomSorting {
 			@Override
 			// Implement custom compare method sorting by type.
 			public int compare(Vegetable veg1, Vegetable veg2) {
+				
+				// Setup alphabetical order of type.
 				String[] typeOrder = {"CAPSICUM", "LETTUCE", "ONION", "TOMATO"};
 				int index1 = -1;
 				int index2 = -1;
 				
+				// Grab vegetable type from the list and check it's position in the alphabetical order.
 				for (int i = 0; i < typeOrder.length; i++) {
 					if (veg1.getType() == Vegetable.TYPE.valueOf(typeOrder[i])) {
 						index1 = i;
@@ -33,6 +36,8 @@ public class CustomSorting {
 						index2 = i;
 					}
 				}
+				
+				// Compare the vegetable's position and return -1, 0, 1 to sort alphabetically.
 				return Integer.compare(index1, index2);
 			}
 	    });
@@ -52,7 +57,8 @@ public class CustomSorting {
 			
 			@Override
 			public int compare(Vegetable veg1, Vegetable veg2) {
-				// Sort in descending order of ripeness.
+				
+				// Compare vegetable's ripeness return -1, 0, 1 to sort in descending order.
 				return Double.compare(veg2.getRipeness(), veg1.getRipeness());
 			}
 		});
