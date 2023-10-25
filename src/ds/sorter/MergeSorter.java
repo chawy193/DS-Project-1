@@ -48,7 +48,7 @@ public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
 		}
 		
 		// If there are elements from left hand side list not yet added, 
-		// after comparing to elements from right side list, will be added
+		// when comparing to elements from right side list, will be added
 		// to the list now.
 		while (i < left.size()) {
 			result.add(left.get(i));
@@ -56,7 +56,7 @@ public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
 		}
 		
 		// If there are elements from right hand side list not yet added, 
-		// after comparing to elements from left side list, will be added
+		// when comparing to elements from left side list, will be added
 		// to the list now.
 		while (j < right.size()) {
 			result.add(right.get(j));
